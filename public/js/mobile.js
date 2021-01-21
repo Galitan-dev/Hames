@@ -1,5 +1,25 @@
 import QrScanner from "../libraries/qr-scanner.min.js";
+
+
+
+
+// ################ SCANNER ################ \\
+
 QrScanner.WORKER_PATH = "../libraries/qr-scanner-worker.min.js";
+
+const videoElem = document.getElementById("scanView"),
+    qrScanner = new QrScanner(videoElem, setResult, setResult);
+
+qrScanner.start();
+
+function setResult(result) {
+    document.getElementById("result").innerHTML = result;
+}
+
+
+
+
+// ################# SOCKET ################# \\
 
 const socket = io();
 
@@ -13,14 +33,3 @@ socket.on('appeared', () => {
     socket.emit('flappy bird');
     document.onclick = () => socket.emit("flap", 15);
 });
-
-function main() {
-    const videoElem = document.getElementById("scanView"),
-        qrScanner = new QrScanner(videoElem, setResult, setResult);
-
-    qrScanner.start();
-}
-
-function setResult(result) {
-    document.getElementById("result").innerHTML = result;
-}
