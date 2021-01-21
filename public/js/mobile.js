@@ -13,7 +13,11 @@ socket.on('appeared', () => {
 
 function main() {
     const videoElem = document.getElementById("scanView"),
-        qrScanner = new QrScanner(videoElem, result => alert(result), error => alert(error));
+        qrScanner = new QrScanner(videoElem, setResult, setResult;
 
     qrScanner.start();
+}
+
+function setResult(result) {
+    document.getElementById("result").innerHTML = result;
 }
