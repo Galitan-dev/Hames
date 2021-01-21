@@ -1,0 +1,27 @@
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#id {
+    position: fixed;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15vh;
+    color: #f1b841;
+}
+
+#qrcode {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 30vh;
+}
+
+body {
+    background-color: #403b3f;
+    font-family: 'Balsamiq Sans', cursive;
+}

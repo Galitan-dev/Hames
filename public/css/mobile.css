@@ -1,0 +1,33 @@
+body {
+    background-color: #403b3f;
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+#id {
+    margin-top: 30vh;
+    margin-left: 1vw;
+    transform: translateY(-50%);
+}
+
+.id-char {
+    color: #f1b841;
+    font-size: 8vh;
+    background-color: transparent;
+    border: none;
+}
+
+#id i {
+    color: #f1b841;
+    font-size: 4vh;
+    margin-left: -40px;
+    margin-right: 50px;
+}
+
+#confirm {
+    background-color: #f1b841;
+    margin-top: 10vh;
+    margin-left: 7vh;
+    font-size: 8vh;
+    border-radius: 20px;
+    color: #4e4c49;
+}
