@@ -1,5 +1,5 @@
 import QrScanner from "../libraries/qr-scanner.min.js";
-QrScanner.WORKER_PATH = "../libraries/qr-scanner-worker.min.js';
+QrScanner.WORKER_PATH = "../libraries/qr-scanner-worker.min.js";
 
 const socket = io();
 
