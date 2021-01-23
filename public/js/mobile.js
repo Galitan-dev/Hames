@@ -38,7 +38,7 @@ function onDeviceMotion(cb) {
     DeviceMotionEvent.requestPermission().then(response => {
         if (response == 'granted') {
             window.addEventListener('devicemotion', cb);
-        } else alert("Permission Denied");
+        } else alert("Permission" + response);
     }).catch(alert);
 }
 
