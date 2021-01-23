@@ -38,7 +38,7 @@ function onDeviceMotion(cb) {
     DeviceMotionEvent.requestPermission().then(response => {
         if (response == 'granted') {
             window.addEventListener('devicemotion', cb);
-        } else alert("Permission" + response);
+        } else alert("Permission " + response);
     }).catch(alert);
 }
 
@@ -46,10 +46,11 @@ function catchFruits() {
     
     DeviceMotionEvent.requestPermission().then(response => {
         if (response == 'granted') {
+            alert("Permission granted")
             window.addEventListener('devicemotion', e => {
-                socket.emit('motion', e.acceleration)
+                socket.emit('motion', e.accelerationIncludingGravity)
             });
-        } else alert("Permission" + response);
+        } else alert("Permission " + response);
     }).catch(alert);
 
     launchGame("catch-fruits")
