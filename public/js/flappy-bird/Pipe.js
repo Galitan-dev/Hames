@@ -1,11 +1,11 @@
-export class Pipe {
+export default class Pipe {
 
     constructor (bird) {
 
         this.bird = bird;
 
         this.x = width;
-        this.width = 20;
+        this.width = 40;
 
         this.speed = 3;
 
@@ -14,12 +14,13 @@ export class Pipe {
         this.bottom = height - this.top - (bird.height + 50 + Math.random() * 200);
 
         this.color = color(213, 211, 212);
+        this.hitColor = color(255, 105, 97);
 
     }
 
     draw () {
 
-        fill(this.color);
+        fill(this.collision ? this.hitColor : this.color);
         rect(this.x, 0, this.width, this.top);
         rect(this.x, height - this.bottom, this.width, this.bottom);
 
@@ -35,4 +36,15 @@ export class Pipe {
         return this.x < -this.width;
     }
 
+    get collision () {
+        return inRange(this.bird.x, this.x, this.width) && (
+            inRange(this.bird.y, 0, this.top) ||
+            inRange(this.bird.y, height - this.bottom, this.bottom)
+        )
+    }
+
+}
+
+function inRange(n, start, length) {
+    return n >= start && n <= start + length;
 }

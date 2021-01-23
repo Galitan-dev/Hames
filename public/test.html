@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const audio = new AudioContext();
+
+        function beep(vol, freq, duration){
+            var v = audio.createOscillator(),
+                u = audio.createGain();
+            
+            v.connect(u);
+            v.frequency.value = freq;
+            v.type="square";
+
+            u.connect(audio.destination);
+            u.gain.value = vol * .01;
+
+            v.start(audio.currentTime);
+            v.stop(audio.currentTime + duration * .001);
+        }
+    </script>
+</body>
+</html>

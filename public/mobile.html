@@ -14,14 +14,14 @@
     <link rel="stylesheet" href="css/mobile.css">
 
     <script src="libraries/socket.io.min.js"></script>
+    <script src="libraries/cookie-parser.min.js"></script>
+
+    <script src="js/mobile.js" type="text/javascript"></script>
+
 </head>
 
-<body onload="main();">
-
-    <video id="scanView"></video>
-    <p id="result"></p>
-
-    <script src="js/mobile.js" type="module"></script>
+<body onload="main();" onclick="window.onClick();">
+    <div id="clickReceiver"></div>
 </body>
 
 </html>

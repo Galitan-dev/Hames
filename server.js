@@ -1,5 +1,6 @@
 const express = require('express');
 const device = require('express-device');
+const cookieParser = require('cookie-parser');
 const http = require('http');
 const socketIo = require('socket.io');
 const path = require('path');
@@ -11,12 +12,24 @@ const io = socketIo(server);
 
 const PORT = process.env.PORT || 200;
 
-app.use(device.capture());
 app.use(express.static(path.join(__dirname, "public"), { index: false, extensions: ["html"] }));
+app.use(device.capture());
+app.use(cookieParser());
+
+app.all(/\/[ABCDEF]{4}/g, (req, res) => {
+
+    res.cookie("id", req.url.substr(1));
+    res.redirect("/");
+
+});
 
 app.get('/', (req, res) => {
 
-    if (req.device.type == "phone") res.sendFile(path.join(__dirname, "public", "mobile.html"));
+    if (req.device.type == "phone") {
+        if (req.cookies.id != null) res.sendFile(path.join(__dirname, "public", "mobile.html"));
+        else res.sendFile(path.join(__dirname, "public", "scan.html"));
+    } 
+    
     else res.sendFile(path.join(__dirname, "public", "desktop.html"));
 
 });
@@ -49,12 +62,8 @@ io.on('connection', /** @type {(socket: socketIo.Socket) => null} */ socket => {
             desktop.emit("disappeared");
         });
 
-        phone.on('p5', (...args) => desktop.emit.apply(desktop, ['p5'].concat(args)));
-        phone.on('flappy bird', () => desktop.emit("flappy bird"));
-        phone.on('flap', () => desktop.emit("flap"));
-
-        desktop.on('draw', () => phone.emit("draw"));
-        desktop.on('dimensions', (w, h) => phone.emit("dimensions", w, h));
+        phone.onAny(desktop.emit.bind(desktop));
+        desktop.onAny(phone.emit.bind(phone));
 
     });
 

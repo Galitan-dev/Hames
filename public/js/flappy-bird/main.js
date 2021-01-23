@@ -1,24 +1,17 @@
+import Bird from "./Bird.js";
+import Pipe from "./Pipe.js";
+
 var bird,
     pipes = [];
 
-var Pipe;
+bird = new Bird();
+pipes.push(new Pipe(bird));
 
-export async function main(socket) {
+window.socket.on('flap', force => {
+    bird.flap(force);
+});
 
-    bird = new (await import('./Bird.js')).Bird();
-
-    Pipe = (await import('./Pipe.js')).Pipe;
-        pipes.push(new Pipe(bird));
-
-    socket.on('flap', force => {
-        bird.flap(force);
-    });
-
-    return update;
-
-}
-
-function update() {
+window.draw = function () {
 
     background(0, 0, 0);
 
