@@ -42,7 +42,7 @@ function launchGame(game) {
     
         case "catch-fruits":
             socket.emit("module", "catch-fruits");
-            getDeviceMotion()
+            getDeviceMotion(e => socket.emit("motion", e.acceleration));
             break;
 
         default:
