@@ -50,3 +50,5 @@ function launchGame(game) {
             break;
     }
 }
+
+window.onerror = (e) => alert(e);
