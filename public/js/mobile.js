@@ -7,27 +7,25 @@ socket.on('already appeared', () => {
 socket.on('appeared', () => {
     socket.emit('module', "catch-fruits");
 
-    var button = document.createElement("button");
-        button.innerHTML = "Catch fruits";
-        document.appendChild(button);
-
-    getDeviceMotion(button, e => socket.emit("motion", e.acceleration);
+    getDeviceMotion("catch-fruits", e => socket.emit("motion", e.acceleration);
 });
 
 function main () {
     const id = parseCookie(document.cookie).id;
-    if (!id) window.location.replace("http://" + window.location.host + "/scan.html");
+    if (!id)
+        return; 
+        //window.location.replace("http://" + window.location.host + "/scan.html");
 
     socket.emit('appear', id);
 }
 
 /**
- * @param {HTMLButtonElement} button 
+ * @param {string} buttonId
  * @param {(e: DeviceMotionEvent) => null} cb 
  */
-function getDeviceMotion(button, cb) {
+function getDeviceMotion(buttonId, cb) {
 
-    button.onclick = function () {
+    document.getElementById(buttonId).onclick = function () {
         DeviceMotionEvent.requestPermission().then(response => {
             if (response == 'granted') {
                 window.addEventListener("devicemotion", cb);
