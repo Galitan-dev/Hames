@@ -12,10 +12,17 @@ body {
     font-family: 'Balsamiq Sans', cursive;
 }
 
-.game {
+.game-label {
     color: #403b3f;
-    font-size: 12vh;
+    font-size: 8vw;
     background-color: #f1b841;
     border-radius: 20px;
-    padding: 10px;
+    margin: 20vh 10vw;
+    margin-left: 5vw ;
+    text-align: center;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
 }

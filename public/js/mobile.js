@@ -5,9 +5,7 @@ socket.on('already appeared', () => {
 });
 
 socket.on('appeared', () => {
-    socket.emit('module', "catch-fruits");
-
-    getDeviceMotion("catch-fruits", e => socket.emit("motion", e.acceleration));
+    document.querySelectorAll(".game").forEach(e => e.disable = false);
 });
 
 function main () {
@@ -20,17 +18,31 @@ function main () {
 }
 
 /**
- * @param {string} buttonId
  * @param {(e: DeviceMotionEvent) => null} cb 
  */
-function getDeviceMotion(buttonId, cb) {
+function getDeviceMotion(cb) {
+    DeviceMotionEvent.requestPermission().then(response => {
+        if (response == 'granted') {
+            window.addEventListener("devicemotion", cb);
+        }
+        else console.error("access denied");
+    }).catch(console.error);
+}
 
-    document.getElementById(buttonId).onclick = function () {
-        DeviceMotionEvent.requestPermission().then(response => {
-            if (response == 'granted') {
-                window.addEventListener("devicemotion", cb);
-            }
-        });
+function launchGame(game) {
+    switch (game) {
+        case "flappy-bird":
+            socket.emit("module", "flappy-bird");
+            document.body.onclick = () => socket.emit("flap");
+            break;
+    
+        case "catch-fruits":
+            socket.emit("module", "catch-fruits");
+            getDeviceMotion()
+            break;
+
+        default:
+            console.error("Invalid game \"" + game + "\"");
+            break;
     }
-
 }

@@ -20,9 +20,15 @@
 
 </head>
 
-<body onload="main();" onclick="window.onClick();">
-    <div id="clickReceiver"></div>
-    <a id="catch-fruits" class="game">Catch fruits</a>
+<body onload="main();">
+    <ul id="games">
+        <a id="flappy-bird" disabled onclick="launchGame('flappy-bird');" href="javascript:void(0);">
+            <li class="game-label">Flappy Bird</li>
+        </a>
+        <a id="catch-fruits" disabled onclick="launchGame('catch-fruits');" href="javascript:void(0);">
+            <li class="game-label">Catch Fruits</li>
+        </a>
+    </ul>
 </body>
 
 </html>
