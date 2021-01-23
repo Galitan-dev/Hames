@@ -17,22 +17,6 @@ function main () {
     socket.emit('appear', id);
 }
 
-/**
- * @param {(e: DeviceMotionEvent) => null} cb 
- */
-function getDeviceMotion(cb) {
-    if (typeof DeviceMotionEvent.requestPermission === 'function') {
-        DeviceMotionEvent.requestPermission()
-        .then(response => {
-            if (response == 'granted') {
-                window.addEventListener('devicemotion', (e) => cb(e));
-            }
-        }).catch(console.error)
-    } else {
-        window.addEventListener("devicemotion", e => cb(e));
-    }
-}
-
 function launchGame(game) {
     switch (game) {
         case "flappy-bird":
@@ -42,7 +26,6 @@ function launchGame(game) {
     
         case "catch-fruits":
             socket.emit("module", "catch-fruits");
-            getDeviceMotion(e => socket.emit("motion", e.acceleration));
             break;
 
         default:
@@ -51,4 +34,24 @@ function launchGame(game) {
     }
 }
 
-window.onerror = (e) => alert(e);
+function onDeviceMotion(cb) {
+    DeviceMotionEvent.requestPermission().then(response => {
+        if (response == 'granted') {
+            window.addEventListener('devicemotion', cb);
+        } else alert("Permission Denied");
+    }).catch(alert);
+}
+
+function flappyBird() {
+
+    DeviceMotionEvent.requestPermission().then(response => {
+        if (response == 'granted') {
+            window.addEventListener('devicemotion', e => {
+                socket.emit('motion', e.acceleration)
+            });
+        } else alert("Permission Denied");
+    }).catch(alert);
+
+    launchGame("flappy-bird")
+
+}
