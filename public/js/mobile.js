@@ -7,7 +7,7 @@ socket.on('already appeared', () => {
 socket.on('appeared', () => {
     socket.emit('module', "catch-fruits");
 
-    getDeviceMotion("catch-fruits", e => socket.emit("motion", e.acceleration);
+    getDeviceMotion("catch-fruits", e => socket.emit("motion", e.acceleration));
 });
 
 function main () {
