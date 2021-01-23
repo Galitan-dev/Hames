@@ -42,16 +42,17 @@ function onDeviceMotion(cb) {
     }).catch(alert);
 }
 
-function flappyBird() {
+function catchFruits() {
 
     DeviceMotionEvent.requestPermission().then(response => {
         if (response == 'granted') {
+            alert("Permission granted")
             window.addEventListener('devicemotion', e => {
                 socket.emit('motion', e.acceleration)
             });
         } else alert("Permission Denied");
     }).catch(alert);
 
-    launchGame("flappy-bird")
+    launchGame("catch-fruits")
 
 }
