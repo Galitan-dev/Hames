@@ -21,12 +21,14 @@ function main () {
  * @param {(e: DeviceMotionEvent) => null} cb 
  */
 function getDeviceMotion(cb) {
-    DeviceMotionEvent.requestPermission().then(response => {
-        if (response == 'granted') {
-            window.addEventListener("devicemotion", cb);
-        }
-        else console.error("access denied");
-    }).catch(console.error);
+    if (DeviceMotionEvent.requestPermission instanceof "function") {
+        DeviceMotionEvent.requestPermission().then(response => {
+            if (response == 'granted') {
+                window.addEventListener("devicemotion", cb);
+            }
+            else console.error("access denied");
+        }).catch(console.error); 
+    } else alert("Device not supporting")
 }
 
 function launchGame(game) {
