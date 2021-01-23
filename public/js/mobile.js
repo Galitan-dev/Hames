@@ -43,14 +43,13 @@ function onDeviceMotion(cb) {
 }
 
 function catchFruits() {
-
+    
     DeviceMotionEvent.requestPermission().then(response => {
         if (response == 'granted') {
-            alert("Permission granted")
             window.addEventListener('devicemotion', e => {
                 socket.emit('motion', e.acceleration)
             });
-        } else alert("Permission Denied");
+        } else alert("Permission" + response);
     }).catch(alert);
 
     launchGame("catch-fruits")
