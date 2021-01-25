@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io("http://pcethan:200");
 
 socket.on('already appeared', () => {
     alert("Cet appareil est déjà jumelé !");
