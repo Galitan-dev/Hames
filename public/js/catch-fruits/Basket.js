@@ -31,4 +31,10 @@ export default class {
 
     }
 
+    applyAcceleration(acceleration) {
+        if (Math.abs(acceleration) < 1) return
+
+        this.x += acceleration * 10;
+    }
+
 }

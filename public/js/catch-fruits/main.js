@@ -7,4 +7,4 @@ window.draw = function () {
     basket.draw();
 }
 
-window.socket.on("motion", acceleration => basket.move(acceleration.y));
+window.socket.on("motion", acceleration => basket.applyAcceleration(acceleration.y));
