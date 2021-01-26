@@ -5,11 +5,22 @@ export default class {
         this.x = width / 2;
         this.y = height;
 
+        this.velocity = 0;
+
         this.height = 100;
         this.width = 250;
 
         this.color = "#f1b841";
 
+    }
+
+    update () {
+        this.x += this.velocity;
+
+        this.velocity > 0 ? //reduce distance to zero
+            this.velocity-- : 
+            this.velocity++
+        ;
     }
 
     draw () {
@@ -32,9 +43,7 @@ export default class {
     }
 
     applyAcceleration(acceleration) {
-        if (Math.abs(acceleration) < 1) return
-
-        this.x += acceleration * 10;
+        this.velocity = acceleration;
     }
 
 }
