@@ -28,16 +28,33 @@ function launchGame(game) {
             socket.emit("module", "catch-fruits");
             break;
 
+        case "car":
+            onDeviceOrientation(e => {
+                socket.emit("orientation", e);
+            });
+            socket.emit("module", "car");
+            break;
+
         default:
             console.error("Invalid game \"" + game + "\"");
             break;
     }
 }
 
+/** @param {(e: DeviceMotionEvent) => void} cb */
 function onDeviceMotion(cb) {
     DeviceMotionEvent.requestPermission().then(response => {
         if (response == 'granted') {
             window.addEventListener('devicemotion', cb);
+        } else alert("Permission " + response);
+    }).catch(alert);
+}
+
+/** @param {(e: DeviceOrientationEvent) => void} cb */
+function onDeviceOrientation(cb) {
+    DeviceOrientationEvent.requestPermission().then(response => {
+        if (response == 'granted') {
+            window.addEventListener('deviceorientation', cb);
         } else alert("Permission " + response);
     }).catch(alert);
 }
