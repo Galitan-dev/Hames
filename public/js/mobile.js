@@ -29,9 +29,6 @@ function launchGame(game) {
             break;
 
         case "car":
-            onDeviceOrientation(e => {
-                socket.emit("orientation", e);
-            });
             socket.emit("module", "car");
             break;
 
@@ -72,4 +69,15 @@ function catchFruits() {
 
     launchGame("catch-fruits")
 
+}
+
+function car() {
+    DeviceOrientationEvent.requestPermission().then(response => {
+        if (response == 'granted') {
+            window.addEventListener('deviceorientation', e => socket.emit({ alpha: e.alpha, beta: e.beta, gamma: e.gamma }));
+        } else alert("Permission " + response);
+    }).catch(alert);
+
+    
+    launchGame("car")
 }
