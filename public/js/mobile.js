@@ -77,7 +77,7 @@ function car() {
             window.addEventListener('deviceorientation', e => {
                 document.write(e.alpha)
                 socket.emit({ alpha: e.alpha, beta: e.beta, gamma: e.gamma });
-            });
+            }, true);
         } else alert("Permission " + response);
     }).catch(alert);
     
