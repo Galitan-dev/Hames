@@ -74,10 +74,12 @@ function catchFruits() {
 function car() {
     DeviceOrientationEvent.requestPermission().then(response => {
         if (response == 'granted') {
-            window.addEventListener('deviceorientation', e => socket.emit({ alpha: e.alpha, beta: e.beta, gamma: e.gamma }));
+            window.addEventListener('deviceorientation', e => {
+                document.write(e.alpha)
+                socket.emit({ alpha: e.alpha, beta: e.beta, gamma: e.gamma });
+            });
         } else alert("Permission " + response);
     }).catch(alert);
-
     
     launchGame("car")
 }
